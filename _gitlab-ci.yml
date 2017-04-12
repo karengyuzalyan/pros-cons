@@ -1,0 +1,8 @@
+image: node:boron
+
+before_script:
+  - npm install
+
+test:
+  script:
+  - npm run lint
