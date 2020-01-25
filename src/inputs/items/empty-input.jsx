@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-class EmptyInput extends Component {
-  render() {
-    return (
-      <section onClick={() => this.props.editInputs(this.props.name, this.props.index)}>
-        {this.props.text}
-      </section>
-    );
-  }
+function EmptyInput(props) {
+  const onEditInputs = () => {
+    props.editInputs(props.name, props.index);
+  };
+
+  return <section onClick={onEditInputs}>{props.text}</section>;
 }
+
+EmptyInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  index: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  editInputs: PropTypes.func.isRequired
+};
 
 export default EmptyInput;

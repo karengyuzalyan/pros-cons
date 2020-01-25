@@ -1,18 +1,12 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
-import ListWrapper from './src';
+import ListWrapper from "./src";
 
 class ExampleApp extends Component {
   render() {
-    return (
-      <ListWrapper />
-    );
+    return <ListWrapper />;
   }
-
 }
 
-ReactDOM.render(
-  <ExampleApp />,
-  document.getElementById("root")
-);
+ReactDOM.render(<ExampleApp />, document.getElementById("root"));

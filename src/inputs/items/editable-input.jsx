@@ -1,17 +1,30 @@
-import React, { Component } from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-class EditableInput extends Component {
+function EditableInput(props) {
+  const onInputBlur = e => {
+    props.resetEdit(props.name, props.index, e.target.value);
+  };
 
-  render() {
-    return(
-      <input
-        type="text"
-        value={this.props.text}
-        onChange={e => this.props.changeValue(this.props.name, this.props.index, e.target.value)}
-        autoFocus
-        onBlur={e => this.props.resetEdit(this.props.name, this.props.index, e.target.value)}
-      />
-    );
-  }
+  const onChangeInputValue = e => {
+    props.changeValue(props.name, props.index, e.target.value);
+  };
+  return (
+    <input
+      autoFocus
+      type="text"
+      value={props.text}
+      onBlur={onInputBlur}
+      onChange={onChangeInputValue}
+    />
+  );
 }
+
+EditableInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  index: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  changeValue: PropTypes.func.isRequired
+};
+
 export default EditableInput;
