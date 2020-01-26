@@ -1,93 +1,94 @@
-import React, { PureComponent } from "react";
-import EditableBlock from "./inputs/pros-or-cons";
+import React, { PureComponent } from 'react'
+import EditableBlock from './inputs/pros-or-cons'
 
 class ListWrapper extends PureComponent {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       editableArrays: {
         pros: [
-          "It is really testy1",
-          "It is really testy2",
-          "It is really testy3",
-          "It is really testy4"
+          'It is really testy1',
+          'It is really testy2',
+          'It is really testy3',
+          'It is really testy4',
         ],
-        cons: ["Make me fat", "Too expensive"]
+        cons: ['Make me fat', 'Too expensive'],
       },
       isEditable: {
         pros: NaN,
-        cons: NaN
-      }
-    };
+        cons: NaN,
+        nan: 1,
+      },
+    }
   }
 
   addNewInput = type => {
-    Object.keys(this.state.editableArrays).forEach((item, i) => {
+    const editableArrays = { ...this.state.editableArrays }
+    Object.keys(editableArrays).forEach((item, i) => {
       if (item === type) {
-        Object.values(this.state.editableArrays)[i].push("");
-        this.setState({ type });
-        this.editInputs(
-          type,
-          Object.values(this.state.editableArrays)[i].length - 1
-        );
+        Object.values(editableArrays)[i].push('')
+        this.setState({ type, editableArrays })
+        this.editInputs(type, Object.values(editableArrays)[i].length - 1)
       }
-    });
-  };
+    })
+  }
 
   editInputs = (type, index) => {
-    const { isEditable } = this.state;
-    if (type === "pros") {
-      isEditable.pros = index;
+    const { isEditable } = this.state
+    if (type === 'pros') {
+      isEditable.pros = index
     } else {
-      isEditable.cons = index;
+      isEditable.cons = index
     }
-    this.setState({ isEditable });
-  };
+    this.setState({ isEditable })
+  }
 
   resetEdit = (type, index, value) => {
-    const { isEditable } = this.state;
-    this.changeValue(type, index, value);
-    isEditable.pros = NaN;
-    isEditable.cons = NaN;
-    this.setState({ isEditable });
-  };
+    const { isEditable } = this.state
+    this.changeValue(type, index, value)
+    isEditable.pros = NaN
+    isEditable.cons = NaN
+    this.setState({ isEditable })
+  }
 
   changeValue = (type, index, value) => {
-    const { editableArrays } = this.state;
-    if (value === "") {
+    const editableArrays = { ...this.state.editableArrays }
+
+    if (value === '') {
       switch (type) {
-        case "pros":
-          editableArrays.pros.splice(index, 1);
-          break;
-        case "cons":
-          editableArrays.cons.splice(index, 1);
-          break;
+        case 'pros':
+          editableArrays.pros.splice(index, 1)
+          break
+        case 'cons':
+          editableArrays.cons.splice(index, 1)
+          break
         default:
-          return false;
+          return false
       }
-      this.setState({ editableArrays });
+      this.setState({ editableArrays })
     } else {
       switch (type) {
-        case "pros":
-          this.state.editableArrays.pros[index] = value;
-          this.setState({ editableArrays: this.state.editableArrays });
-          break;
-        case "cons":
-          this.state.editableArrays.cons[index] = value;
-          this.setState({ editableArrays: this.state.editableArrays });
-          break;
+        case 'pros':
+          editableArrays.pros[index] = value
+          this.setState({ editableArrays })
+          break
+        case 'cons':
+          editableArrays.cons[index] = value
+          this.setState({ editableArrays })
+          break
         default:
-          return false;
+          return false
       }
     }
-    return null;
-  };
+    return null
+  }
 
   render() {
-    const { editableArrays, isEditable } = this.state;
+    const { editableArrays, isEditable } = this.state
+
     return (
       <div className="list-wrapper">
-        <header>Should I eat at McDonalds ?</header>;
+        <header>Should I eat at McDonalds ?</header>
         <article className="lists">
           {Object.keys(editableArrays).map((item, i) => (
             <EditableBlock
@@ -104,8 +105,8 @@ class ListWrapper extends PureComponent {
           ))}
         </article>
       </div>
-    );
+    )
   }
 }
 
-export default ListWrapper;
+export default ListWrapper

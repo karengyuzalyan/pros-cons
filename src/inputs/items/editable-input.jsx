@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 
 function EditableInput(props) {
   const onInputBlur = e => {
-    props.resetEdit(props.name, props.index, e.target.value);
-  };
+    props.resetEdit(props.name, props.index, e.target.value)
+  }
 
   const onChangeInputValue = e => {
-    props.changeValue(props.name, props.index, e.target.value);
-  };
+    props.changeValue(props.name, props.index, e.target.value)
+  }
   return (
     <input
       autoFocus
@@ -17,14 +17,14 @@ function EditableInput(props) {
       onBlur={onInputBlur}
       onChange={onChangeInputValue}
     />
-  );
+  )
 }
 
 EditableInput.propTypes = {
   name: PropTypes.string.isRequired,
-  index: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  changeValue: PropTypes.func.isRequired
-};
+  changeValue: PropTypes.func.isRequired,
+}
 
-export default EditableInput;
+export default EditableInput

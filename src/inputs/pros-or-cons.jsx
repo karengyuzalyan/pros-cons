@@ -1,34 +1,34 @@
-import React from "react";
-import PropTypes from "prop-types";
-import EmptyInput from "./items/empty-input";
-import EditableInput from "./items/editable-input";
+import React from 'react'
+import PropTypes from 'prop-types'
+import EmptyInput from './items/empty-input'
+import EditableInput from './items/editable-input'
 
 function EditableBlock(props) {
-  const { name, isEditable, addNewInput, data } = props;
+  const { name, isEditable, addNewInput, data } = props
 
   const onAddNewInput = () => {
-    addNewInput(name);
-  };
+    addNewInput(name)
+  }
 
   const getPropAndConstItems = () => {
     if (Array.isArray(data) && data.length) {
-      data.map((item, i) => {
+      return data.map((item, i) => {
         if (i === isEditable) {
           return (
             <li key={i}>
               <EditableInput index={i} text={item} {...props} />
             </li>
-          );
+          )
         }
         return (
           <li key={i}>
             <EmptyInput index={i} text={item} {...props} />
           </li>
-        );
-      });
+        )
+      })
     }
-    return null;
-  };
+    return null
+  }
 
   return (
     <section className="list">
@@ -40,14 +40,14 @@ function EditableBlock(props) {
         </li>
       </ol>
     </section>
-  );
+  )
 }
 
 EditableBlock.propTypes = {
   name: PropTypes.string.isRequired,
-  isEditable: PropTypes.string.isRequired,
+  isEditable: PropTypes.number.isRequired,
   addNewInput: PropTypes.func.isRequired,
-  data: PropTypes.array(PropTypes.shape({})).isRequired
-};
+  data: PropTypes.array.isRequired,
+}
 
-export default EditableBlock;
+export default EditableBlock
